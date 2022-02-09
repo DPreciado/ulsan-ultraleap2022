@@ -6,14 +6,27 @@ public class IndicesTouchManager : MonoBehaviour
 {
     [SerializeField]
     float PinchDistance;
+    [SerializeField]
+    float PalmDistance;
 
     [SerializeField]
-    Transform hand1;
+    Transform lIndex;
 
     [SerializeField]
-    Transform hand2;
+    Transform lThumb;
+    
+    [SerializeField]
+    Transform rIndex;
 
-    bool PinchReady = true;
+    [SerializeField]
+    Transform rThumb;
+    [SerializeField]
+    Transform rPalm;
+
+    [SerializeField]
+    Transform lPalm;
+
+    bool PinchReady = false;
     void Start()
     {
         
@@ -22,15 +35,23 @@ public class IndicesTouchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Vector3.Distance(hand1.position,hand2.position) <= PinchDistance && PinchReady)
+        if(Vector3.Distance(lPalm.position,rPalm.position) <= PalmDistance)
         {
-            Debug.Log("PINCH");
-            PinchReady = false;
+            Debug.Log("close");
+            PinchReady = true;
         }
 
-        if(Vector3.Distance(hand1.position,hand2.position) >= PinchDistance)
+        if(PinchReady)
         {
-            PinchReady = true;
+            if (Vector3.Distance(lIndex.position,lThumb.position) <= PinchDistance)
+            {
+                Debug.Log("pinch");
+            }
+        }
+
+        if(Vector3.Distance(lPalm.position,rPalm.position) >= PalmDistance)
+        {
+            PinchReady = false;
 
         }
     }
