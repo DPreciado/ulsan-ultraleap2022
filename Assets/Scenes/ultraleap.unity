@@ -218,8 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837474308c8c66d4c95757865fdefc60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinchDistance: 0.1
-  PalmDistance: 0.06
+  PinchDistance: 0.025
+  PalmDistance: 0.1
   lIndex: {fileID: 931048111}
   lThumb: {fileID: 391381669}
   rIndex: {fileID: 2024813704}

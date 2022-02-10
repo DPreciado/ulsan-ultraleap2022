@@ -27,6 +27,8 @@ public class IndicesTouchManager : MonoBehaviour
     Transform lPalm;
 
     bool PinchReady = false;
+
+    bool creandoCubo = false;
     void Start()
     {
         
@@ -35,23 +37,31 @@ public class IndicesTouchManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        float handsDistance = (Vector3.Distance(lIndex.position,lThumb.position));
+
         if(Vector3.Distance(lPalm.position,rPalm.position) <= PalmDistance)
         {
-            Debug.Log("close");
             PinchReady = true;
         }
 
         if(PinchReady)
         {
-            if (Vector3.Distance(lIndex.position,lThumb.position) <= PinchDistance)
+            if (Vector3.Distance(lIndex.position,lThumb.position) <= PinchDistance && creandoCubo == false)
             {
-                Debug.Log("pinch");
+                GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                cube.transform.position = new Vector3(0.5f, 0.5f, 0);
+                creandoCubo = true;
             }
         }
 
         if(Vector3.Distance(lPalm.position,rPalm.position) >= PalmDistance)
         {
             PinchReady = false;
+
+        }
+        if(Vector3.Distance(lIndex.position,lThumb.position) >= PinchDistance)
+        {
+            creandoCubo = false;
 
         }
     }
